@@ -1,0 +1,63 @@
+# Gradle
+.gradle/
+build/
+
+# Maven (in case anyone runs Quarkus via Maven)
+target/
+
+# IntelliJ
+.idea
+*.ipr
+*.iml
+*.iws
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# NetBeans
+nb-configuration.xml
+
+# Visual Studio Code
+.vscode
+.factorypath
+
+# OSX
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Vim
+*.swp
+*.swo
+
+# patch
+*.orig
+*.rej
+
+# Logs and JVM dumps
+*.log
+logs/
+*.hprof
+hs_err_pid*.log
+replay_pid*.log
+
+# Local environment
+.env
+.env.local
+
+# Quarkus
+/.quarkus/cli/plugins/
+.quarkus/
+
+# TLS Certificates
+.certs/
+.kotlin/
+
+# The world repo the server creates and owns
+/world/

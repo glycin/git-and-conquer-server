@@ -1,0 +1,92 @@
+### List current conflicts (empty when no merge/cherry-pick/rebase in progress)
+GET {{host}}/git/conflicts
+Accept: application/json
+
+### Resolve a single grid cell, taking OURS
+POST {{host}}/git/conflicts/resolve-cell
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "choice": "OURS"
+}
+
+### Resolve a grid cell, taking THEIRS
+POST {{host}}/git/conflicts/resolve-cell
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "choice": "THEIRS"
+}
+
+### Resolve a grid cell with a custom char (e.g., destroy)
+POST {{host}}/git/conflicts/resolve-cell
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "choice": "CUSTOM",
+  "customChar": "."
+}
+
+### Resolve an object JSON conflict, taking OURS
+POST {{host}}/git/conflicts/resolve-object
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "choice": "OURS"
+}
+
+### Resolve an object JSON conflict by deleting the object
+POST {{host}}/git/conflicts/resolve-object
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "choice": "CUSTOM"
+}
+
+### Resolve an object JSON conflict with a custom MapObject
+POST {{host}}/git/conflicts/resolve-object
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "choice": "CUSTOM",
+  "customObject": {
+    "row": 50,
+    "col": 50,
+    "category": "BUILDING",
+    "type": "barracks",
+    "char": "b",
+    "faction": "republic",
+    "rotation": 0.0,
+    "metadata": {}
+  }
+}
+
+### Resolve a whole building conflict: keep the OURS building anchored at
+### (row, col); every rival building on the other side sharing a conflicted
+### cell is removed entirely (grid cells + object file)
+POST {{host}}/git/conflicts/resolve-building
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "choice": "OURS"
+}
+
+### Finalize the operation (commits the merge / continues rebase or cherry-pick)
+POST {{host}}/git/conflicts/complete
+
+### Abort the operation
+POST {{host}}/git/abort

@@ -1,0 +1,108 @@
+### Place a barracks (BUILDING)
+POST {{host}}/actions/place
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "char": "b",
+  "category": "BUILDING",
+  "type": "tower",
+  "faction": "red"
+}
+
+### Place a tree (TREE) — no faction
+POST {{host}}/actions/place
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "char": "t",
+  "category": "TREE",
+  "type": "oak"
+}
+
+### Place a rock (ROCK) — with free-form metadata
+POST {{host}}/actions/place
+Content-Type: application/json
+
+{
+  "row": 10,
+  "col": 10,
+  "char": "r",
+  "category": "ROCK",
+  "type": "boulder",
+  "metadata": {
+    "hardness": 9,
+    "ore": "iron"
+  }
+}
+
+### Commit the accumulated working-tree changes (the presenter's Commit
+### button); message optional — omitted = auto "Battlefield update: ..."
+POST {{host}}/actions/commit
+Content-Type: application/json
+
+{
+  "message": "Found the Republic capital"
+}
+
+### Destroy whatever is at (50, 50)
+POST {{host}}/actions/destroy
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50
+}
+
+### Modify — change faction (top-level field, free-form patch)
+POST {{host}}/actions/modify
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "patch": {
+    "faction": "blue"
+  }
+}
+
+### Modify — upgrade the char (visual change in map.grid as well; lowercase
+### only — uppercase is the reserved footprint-claim namespace)
+POST {{host}}/actions/modify
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "patch": {
+    "char": "e",
+    "type": "token_generator"
+  }
+}
+
+### Modify — replace metadata wholesale (shallow merge, top-level key)
+POST {{host}}/actions/modify
+Content-Type: application/json
+
+{
+  "row": 50,
+  "col": 50,
+  "patch": {
+    "metadata": {
+      "hp": 800,
+      "level": 2
+    }
+  }
+}
+
+### Tag the Tabularium for a faction (git tag -a tabularium-<faction>-<n>);
+### refused while another claim is still running
+POST {{host}}/actions/tag-wonder
+Content-Type: application/json
+
+{
+  "faction": "player"
+}

@@ -1,0 +1,111 @@
+### Create a branch off HEAD
+POST {{host}}/git/branch
+Content-Type: application/json
+
+{
+  "name": "red-faction"
+}
+
+### Create a branch off a specific ref
+POST {{host}}/git/branch
+Content-Type: application/json
+
+{
+  "name": "from-history",
+  "fromRef": "HEAD~3"
+}
+
+### Checkout (switch branch or detach on a sha)
+POST {{host}}/git/checkout
+Content-Type: application/json
+
+{
+  "ref": "red-faction"
+}
+
+### Back to main
+POST {{host}}/git/checkout
+Content-Type: application/json
+
+{
+  "ref": "main"
+}
+
+### Revert a commit (un-build whatever it added)
+POST {{host}}/git/revert
+Content-Type: application/json
+
+{
+  "sha": "HEAD"
+}
+
+### Cherry-pick a commit from another timeline
+POST {{host}}/git/cherry-pick
+Content-Type: application/json
+
+{
+  "sha": "red-faction"
+}
+
+### Merge another timeline into the current branch
+POST {{host}}/git/merge
+Content-Type: application/json
+
+{
+  "ref": "red"
+}
+
+### Merge with an explicit strategy
+POST {{host}}/git/merge
+Content-Type: application/json
+
+{
+  "ref": "red",
+  "strategy": "abort"
+}
+
+### Rebase current branch onto another
+POST {{host}}/git/rebase
+Content-Type: application/json
+
+{
+  "ontoRef": "main"
+}
+
+### Reset (default mode: MIXED)
+POST {{host}}/git/reset
+Content-Type: application/json
+
+{
+  "ref": "HEAD~1"
+}
+
+### Hard reset — discards working tree changes
+POST {{host}}/git/reset
+Content-Type: application/json
+
+{
+  "ref": "HEAD~3",
+  "mode": "HARD"
+}
+
+### Tag the current commit as a save point
+POST {{host}}/git/tag
+Content-Type: application/json
+
+{
+  "name": "v1-fortress-built"
+}
+
+### Pack the loose objects (the Tabularium's pack button) — answers before/after object stats
+POST {{host}}/git/gc
+Accept: application/json
+
+### Tag a specific ref
+POST {{host}}/git/tag
+Content-Type: application/json
+
+{
+  "name": "before-merge",
+  "ref": "HEAD~1"
+}

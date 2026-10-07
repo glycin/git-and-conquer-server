@@ -1,0 +1,35 @@
+### Full snapshot of the world (grid + objects + HEAD + branch)
+GET {{host}}/repo/snapshot
+Accept: application/json
+
+### Where the world repo and its .git dir live (for the client-side .git reader)
+GET {{host}}/repo/paths
+Accept: application/json
+
+### Repo status (branch, HEAD sha, dirty?) — should be cheap (<10 ms)
+GET {{host}}/repo/status
+Accept: application/json
+
+### Commit log (default: HEAD, limit 50)
+GET {{host}}/repo/log
+Accept: application/json
+
+### Commit log on a specific branch
+GET {{host}}/repo/log?branch=red-faction&limit=20
+Accept: application/json
+
+### All branches with ahead/behind vs main
+GET {{host}}/repo/branches
+Accept: application/json
+
+### All branches with ahead/behind vs a different base
+GET {{host}}/repo/branches?compareTo=red-faction
+Accept: application/json
+
+### Delta between two refs (added/removed/modified objects)
+GET {{host}}/repo/diff?from=HEAD~1&to=HEAD
+Accept: application/json
+
+### Delta between two branches
+GET {{host}}/repo/diff?from=main&to=red-faction
+Accept: application/json

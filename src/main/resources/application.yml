@@ -1,0 +1,13 @@
+quarkus:
+  banner:
+    path: banner.txt
+  http:
+    host: 127.0.0.1
+    port: 8080
+
+world:
+  repo:
+    path: ./world
+  # 0 = new random map every time, anything else gives you the same map again
+  # (the seed that was used ends up in world/meta/map.json)
+  seed: 0
